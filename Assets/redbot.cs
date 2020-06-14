@@ -13,6 +13,7 @@ public class redbot : MonoBehaviour
     Animator am;
     int redbotjump;
     int redbotslide;
+    Renderer rend;
 
     //Use this for initialzation
     void Start()
@@ -21,6 +22,8 @@ public class redbot : MonoBehaviour
         redbotslide = 0;
         rb = GetComponent<Rigidbody2D>();
         am = GetComponent<Animator>();
+        rend = GetComponent<Renderer>();
+        rend.enabled = true;
     }
     //Update is called once per frame
     void Update()
@@ -28,13 +31,16 @@ public class redbot : MonoBehaviour
         if (Input.GetKeyDown(RedbotJump) && redbotjump < 2)
         {
             redbotjump++;
+            AudioSource audio = GetComponent<AudioSource>();
+            audio.Play();
             am.SetBool("redbotjump", true);
             rb.velocity = new Vector2(rb.velocity.x, redbotjumpSpeed);
         }
         else if (Input.GetKey(RedbotSlide) && redbotslide < 1)
         {
             redbotslide++;
-            
+            AudioSource audio = GetComponent<AudioSource>();
+            audio.Play();
             am.SetBool("redbotslide", true);
             rb.velocity = new Vector2(rb.velocity.x, redbotslideSpeed);
         }

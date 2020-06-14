@@ -12,6 +12,7 @@ public class opp : MonoBehaviour
     Animator am;
     int oppjump;
     int oppslide;
+    Renderer rend;
 
     //Use this for initialzation
     void Start()
@@ -20,6 +21,8 @@ public class opp : MonoBehaviour
         oppslide = 0;
         rb = GetComponent<Rigidbody2D>();
         am = GetComponent<Animator>();
+        rend = GetComponent<Renderer>();
+        rend.enabled = true;
     }
     //Update is called once per frame
     void Update()
@@ -27,13 +30,16 @@ public class opp : MonoBehaviour
         if (Input.GetKeyDown(oppJump) && oppjump < 3)
         {
             oppjump++;
+            AudioSource audio = GetComponent<AudioSource>();
+            audio.Play();
             am.SetBool("oppjump", true);
             rb.velocity = new Vector2(rb.velocity.x, oppjumpSpeed);
         }
         else if (Input.GetKey(oppSlide) && oppslide < 1)
         {
             oppslide++;
-
+            AudioSource audio = GetComponent<AudioSource>();
+            audio.Play();
             am.SetBool("oppslide", true);
             rb.velocity = new Vector2(rb.velocity.x, oppslideSpeed);
         }
